@@ -1,4 +1,5 @@
 variable "tf" {
+  description = "Terraformアプリケーション情報"
   type = object({
     name          = string
     shortname     = string
@@ -9,6 +10,7 @@ variable "tf" {
 }
 
 variable "vpc" {
+  description = "VPC設定"
   type = object({
     cidr_block = string
   })
@@ -18,6 +20,7 @@ variable "vpc" {
 }
 
 variable "subnets" {
+  description = "サブネット設定"
   type = object({
     public = object({
       a = object({
