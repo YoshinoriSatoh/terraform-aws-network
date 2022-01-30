@@ -28,7 +28,7 @@ resource "aws_vpc" "main" {
 }
 
 # --- public subnet ---
-resource "aws_subnet" "public-a" {
+resource "aws_subnet" "public_a" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}a"
   cidr_block        = var.subnets.public.a.cidr_block
@@ -37,7 +37,7 @@ resource "aws_subnet" "public-a" {
   }
 }
 
-resource "aws_subnet" "public-c" {
+resource "aws_subnet" "public_c" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}c"
   cidr_block        = var.subnets.public.c.cidr_block
@@ -58,12 +58,12 @@ resource "aws_route_table" "public" {
   }
 }
 
-resource "aws_route_table_association" "public-a" {
+resource "aws_route_table_association" "public_a" {
   subnet_id      = aws_subnet.public-a.id
   route_table_id = aws_route_table.public.id
 }
 
-resource "aws_route_table_association" "public-c" {
+resource "aws_route_table_association" "public_c" {
   subnet_id      = aws_subnet.public-c.id
   route_table_id = aws_route_table.public.id
 }
@@ -73,7 +73,7 @@ resource "aws_internet_gateway" "gw" {
 }
 
 # --- application subnet ---
-resource "aws_subnet" "application-a" {
+resource "aws_subnet" "application_a" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}a"
   cidr_block        = var.subnets.application.a.cidr_block
@@ -82,7 +82,7 @@ resource "aws_subnet" "application-a" {
   }
 }
 
-resource "aws_subnet" "application-c" {
+resource "aws_subnet" "application_c" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}c"
   cidr_block        = var.subnets.application.c.cidr_block
@@ -92,7 +92,7 @@ resource "aws_subnet" "application-c" {
 }
 
 # --- database subnet ---
-resource "aws_subnet" "database-a" {
+resource "aws_subnet" "database_a" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}a"
   cidr_block        = var.subnets.database.a.cidr_block
@@ -101,7 +101,7 @@ resource "aws_subnet" "database-a" {
   }
 }
 
-resource "aws_subnet" "database-c" {
+resource "aws_subnet" "database_c" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}c"
   cidr_block        = var.subnets.database.c.cidr_block
@@ -117,12 +117,12 @@ resource "aws_route_table" "database" {
   }
 }
 
-resource "aws_route_table_association" "database-a" {
+resource "aws_route_table_association" "database_a" {
   subnet_id      = aws_subnet.database-a.id
   route_table_id = aws_route_table.database.id
 }
 
-resource "aws_route_table_association" "database-c" {
+resource "aws_route_table_association" "database_c" {
   subnet_id      = aws_subnet.database-c.id
   route_table_id = aws_route_table.database.id
 }
