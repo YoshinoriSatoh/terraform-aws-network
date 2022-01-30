@@ -38,16 +38,16 @@ No modules.
 | [aws_internet_gateway.gw](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/internet_gateway) | resource |
 | [aws_route_table.database](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table) | resource |
 | [aws_route_table.public](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table) | resource |
-| [aws_route_table_association.database-a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
-| [aws_route_table_association.database-c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
-| [aws_route_table_association.public-a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
-| [aws_route_table_association.public-c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
-| [aws_subnet.application-a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
-| [aws_subnet.application-c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
-| [aws_subnet.database-a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
-| [aws_subnet.database-c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
-| [aws_subnet.public-a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
-| [aws_subnet.public-c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
+| [aws_route_table_association.database_a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
+| [aws_route_table_association.database_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
+| [aws_route_table_association.public_a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
+| [aws_route_table_association.public_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
+| [aws_subnet.application_a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
+| [aws_subnet.application_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
+| [aws_subnet.database_a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
+| [aws_subnet.database_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
+| [aws_subnet.public_a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
+| [aws_subnet.public_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
 | [aws_subnet.tooling](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/subnet) | resource |
 | [aws_vpc.main](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/vpc) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/data-sources/caller_identity) | data source |
@@ -65,15 +65,15 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_subnet-application-a"></a> [subnet-application-a](#output\_subnet-application-a) | Application subnet of availavitity zone A in main VPC. Internet outbound creation is required, if you needed. |
-| <a name="output_subnet-application-c"></a> [subnet-application-c](#output\_subnet-application-c) | Application subnet of availavitity zone C in main VPC. Internet outbound creation is required, if you needed. |
-| <a name="output_subnet-application-ids"></a> [subnet-application-ids](#output\_subnet-application-ids) | A list of application subnet's id. For unconsciously availavirity zone. |
-| <a name="output_subnet-database-a"></a> [subnet-database-a](#output\_subnet-database-a) | Database subnet of availavitity zone A in main VPC. No internet outbound. |
-| <a name="output_subnet-database-c"></a> [subnet-database-c](#output\_subnet-database-c) | Database subnet of availavitity zone A in main VPC. No internet outbound. |
-| <a name="output_subnet-database-ids"></a> [subnet-database-ids](#output\_subnet-database-ids) | A list of database subnet's id. For unconsciously availavirity zone. |
-| <a name="output_subnet-public-a"></a> [subnet-public-a](#output\_subnet-public-a) | Public subnet of availavitity zone A in main VPC. Has internet outbound. |
-| <a name="output_subnet-public-c"></a> [subnet-public-c](#output\_subnet-public-c) | Public subnet of availavitity zone C in main VPC. Has internet outbound. |
-| <a name="output_subnet-public-ids"></a> [subnet-public-ids](#output\_subnet-public-ids) | A list of public subnet's id. For unconsciously availavirity zone. |
-| <a name="output_subnet-tooling"></a> [subnet-tooling](#output\_subnet-tooling) | Tooling subnet of availavitity zone A. (availavitity zone A only) |
+| <a name="output_subnet_application_a"></a> [subnet\_application\_a](#output\_subnet\_application\_a) | Application subnet of availavitity zone A in main VPC. Internet outbound creation is required, if you needed. |
+| <a name="output_subnet_application_c"></a> [subnet\_application\_c](#output\_subnet\_application\_c) | Application subnet of availavitity zone C in main VPC. Internet outbound creation is required, if you needed. |
+| <a name="output_subnet_application_ids"></a> [subnet\_application\_ids](#output\_subnet\_application\_ids) | A list of application subnet's id. For unconsciously availavirity zone. |
+| <a name="output_subnet_database_a"></a> [subnet\_database\_a](#output\_subnet\_database\_a) | Database subnet of availavitity zone A in main VPC. No internet outbound. |
+| <a name="output_subnet_database_c"></a> [subnet\_database\_c](#output\_subnet\_database\_c) | Database subnet of availavitity zone A in main VPC. No internet outbound. |
+| <a name="output_subnet_database_ids"></a> [subnet\_database\_ids](#output\_subnet\_database\_ids) | A list of database subnet's id. For unconsciously availavirity zone. |
+| <a name="output_subnet_public_a"></a> [subnet\_public\_a](#output\_subnet\_public\_a) | Public subnet of availavitity zone A in main VPC. Has internet outbound. |
+| <a name="output_subnet_public_c"></a> [subnet\_public\_c](#output\_subnet\_public\_c) | Public subnet of availavitity zone C in main VPC. Has internet outbound. |
+| <a name="output_subnet_public_ids"></a> [subnet\_public\_ids](#output\_subnet\_public\_ids) | A list of public subnet's id. For unconsciously availavirity zone. |
+| <a name="output_subnet_tooling"></a> [subnet\_tooling](#output\_subnet\_tooling) | Tooling subnet of availavitity zone A. (availavitity zone A only) |
 | <a name="output_vpc"></a> [vpc](#output\_vpc) | Main vpc |
 <!-- END_TF_DOCS -->    
