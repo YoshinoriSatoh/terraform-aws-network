@@ -59,12 +59,12 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public_a" {
-  subnet_id      = aws_subnet.public-a.id
+  subnet_id      = aws_subnet.public_a.id
   route_table_id = aws_route_table.public.id
 }
 
 resource "aws_route_table_association" "public_c" {
-  subnet_id      = aws_subnet.public-c.id
+  subnet_id      = aws_subnet.public_c.id
   route_table_id = aws_route_table.public.id
 }
 
@@ -118,12 +118,12 @@ resource "aws_route_table" "database" {
 }
 
 resource "aws_route_table_association" "database_a" {
-  subnet_id      = aws_subnet.database-a.id
+  subnet_id      = aws_subnet.database_a.id
   route_table_id = aws_route_table.database.id
 }
 
 resource "aws_route_table_association" "database_c" {
-  subnet_id      = aws_subnet.database-c.id
+  subnet_id      = aws_subnet.database_c.id
   route_table_id = aws_route_table.database.id
 }
 
