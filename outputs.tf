@@ -5,55 +5,55 @@ output "vpc" {
 
 output "subnet_public_a" {
   description = "Public subnet of availavitity zone A in main VPC. Has internet outbound."
-  value = aws_subnet.public-a
+  value = aws_subnet.public_a
 }
 
 output "subnet_public_c" {
   description = "Public subnet of availavitity zone C in main VPC. Has internet outbound."
-  value = aws_subnet.public-c
+  value = aws_subnet.public_c
 }
 
 output "subnet_public_ids" {
   description = "A list of public subnet's id. For unconsciously availavirity zone."
   value = [
-    aws_subnet.public-a.id,
-    aws_subnet.public-c.id
+    aws_subnet.public_a.id,
+    aws_subnet.public_c.id
   ]
 }
 
 output "subnet_application_a" {
   description = "Application subnet of availavitity zone A in main VPC. Internet outbound creation is required, if you needed."
-  value = aws_subnet.application-a
+  value = aws_subnet.application_a
 }
 
 output "subnet_application_c" {
   description = "Application subnet of availavitity zone C in main VPC. Internet outbound creation is required, if you needed."
-  value = aws_subnet.application-c
+  value = aws_subnet.application_c
 }
 
 output "subnet_application_ids" {
   description = "A list of application subnet's id. For unconsciously availavirity zone."
   value = [
-    aws_subnet.application-a.id,
-    aws_subnet.application-c.id
+    aws_subnet.application_a.id,
+    aws_subnet.application_c.id
   ]
 }
 
 output "subnet_database_a" {
   description = "Database subnet of availavitity zone A in main VPC. No internet outbound."
-  value = aws_subnet.database-a
+  value = aws_subnet.database_a
 }
 
 output "subnet_database_c" {
   description = "Database subnet of availavitity zone A in main VPC. No internet outbound."
-  value = aws_subnet.database-c
+  value = aws_subnet.database_c
 }
 
 output "subnet_database_ids" {
   description = "A list of database subnet's id. For unconsciously availavirity zone."
   value = [
-    aws_subnet.database-a.id,
-    aws_subnet.database-c.id
+    aws_subnet.database_a.id,
+    aws_subnet.database_c.id
   ]
 }
 
