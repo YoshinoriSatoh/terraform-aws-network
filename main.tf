@@ -136,3 +136,74 @@ resource "aws_subnet" "tooling" {
     Name = "${var.tf.fullname}-tooling"
   }
 }
+
+module "bastion" {
+  source  = "./modules/bastion"
+  tf      = var.tf
+  vpc_id = aws_vpc.main.id
+  subnet_id = aws_subnet.public_a.id
+  session_manager_policy_arn = var.session_manager_policy_arn
+}
+
+# module "nat_instance" {
+#   source  = "./modules/nat_instance"
+#   tf      = var.tf
+#   vpc_id = aws_vpc.main.id
+#   public_subnets = {
+#     a = {
+#       id = aws_subnet.public_a.id
+#     }
+#     c = {
+#       id = aws_subnet.public_c.id
+#     }
+#   }
+#   routing_subnets = {
+#     application = {
+#       a = {
+#         id         = aws_subnet.application_a.id
+#         cidr_block = aws_subnet.application_a.cidr_block
+#       }
+#       c = {
+#         id         = aws_subnet.application_c.id
+#         cidr_block = aws_subnet.application_c.cidr_block
+#       }
+#     }
+#     tooling = {
+#       id         = aws_subnet.tooling.id
+#       cidr_block = aws_subnet.tooling.cidr_block
+#     }
+#   }
+#   multi_az = var.multi_az
+#   session_manager_policy_arn = module.session_manager.session_manager_policy.arn
+# }
+
+module "network_nat_gateway" {
+  source  = "./modules/nat_gateway"
+  tf      = var.tf
+  vpc_id = aws_vpc.main.id
+  public_subnets = {
+    a = {
+      id = aws_subnet.public_a.id
+    }
+    c = {
+      id = aws_subnet.public_c.id
+    }
+  }
+  routing_subnets = {
+    application = {
+      a = {
+        id         = aws_subnet.application_a.id
+        cidr_block = aws_subnet.application_a.cidr_block
+      }
+      c = {
+        id         = aws_subnet.application_c.id
+        cidr_block = aws_subnet.application_c.cidr_block
+      }
+    }
+    tooling = {
+      id         = aws_subnet.tooling.id
+      cidr_block = aws_subnet.tooling.cidr_block
+    }
+  }
+  multi_az = var.multi_az
+}
