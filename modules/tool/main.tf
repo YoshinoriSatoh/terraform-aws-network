@@ -40,7 +40,7 @@ resource "aws_instance" "tool" {
   iam_instance_profile   = aws_iam_instance_profile.tool.id
   vpc_security_group_ids = [aws_security_group.tool.id]
   key_name               = aws_key_pair.tool.key_name
-  disable_api_termination = true
+  disable_api_termination = !var.in_development
   tags = {
     Name = "${var.tf.fullname}-tool"
   }

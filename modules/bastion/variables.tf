@@ -9,6 +9,12 @@ variable "tf" {
   })
 }
 
+variable "in_development" {
+  description = "Terraform構築検証モード（各種リソースの削除保護が無効化されます）" 
+  type = bool
+  default = false
+}
+
 variable "vpc_id" {
   description = "Bastionインスタンスを起動するVPC ID"
   type        = string
