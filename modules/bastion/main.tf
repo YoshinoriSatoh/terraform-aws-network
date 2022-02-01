@@ -36,6 +36,7 @@ resource "aws_instance" "bastion" {
   iam_instance_profile   = aws_iam_instance_profile.bastion.id
   vpc_security_group_ids = [aws_security_group.bastion.id]
   key_name               = aws_key_pair.bastion.key_name
+  disable_api_termination = true
   tags = {
     Name = "${var.tf.fullname}-bastion"
   }

@@ -39,6 +39,7 @@ resource "aws_instance" "nat_a" {
   vpc_security_group_ids      = [aws_security_group.nat_instance.id]
   key_name                    = aws_key_pair.instance.key_name
   source_dest_check           = false
+  disable_api_termination = true
   tags = {
     Name               = "${var.tf.fullname}-nat-instance-a"
     AllowSessionManger = true
@@ -63,6 +64,7 @@ resource "aws_instance" "nat_c" {
   vpc_security_group_ids      = [aws_security_group.nat_instance.id]
   key_name                    = aws_key_pair.instance.key_name
   source_dest_check           = false
+  disable_api_termination = true
   tags = {
     Name               = "${var.tf.fullname}-nat-instance-c"
     AllowSessionManger = true
