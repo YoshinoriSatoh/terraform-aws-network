@@ -143,6 +143,7 @@ module "bastion" {
   vpc_id = aws_vpc.main.id
   subnet_id = aws_subnet.public_a.id
   session_manager_policy_arn = var.session_manager_policy_arn
+  public_key_path = var.public_key_paths.bastion
 }
 
 # module "nat_instance" {
@@ -175,6 +176,7 @@ module "bastion" {
 #   }
 #   multi_az = var.multi_az
 #   session_manager_policy_arn = module.session_manager.session_manager_policy.arn
+#   public_key_path = var.public_key_paths.nat
 # }
 
 module "network_nat_gateway" {

@@ -80,3 +80,26 @@ variable "subnets" {
     }
   }
 }
+
+variable "multi_az" {
+  description = "NATインスタンス/ゲートウェイを冗長化します（Bastionインスタンスは冗長化しません）"
+  type = bool
+  default = false
+}
+
+variable "public_key_paths" {
+  description = "Bastion/NATインスタンスのキーペアのパブリックキーファイルパス. 呼び出し側でSSHキーを生成の上、ファイルパスを指定してください。"
+  type        = object({
+    bastion = string
+    nat = string
+  })
+  default = {
+    bastion = "./key_pairs/bastion.pub"
+    nat = "./key_pairs/nat_instance.pub"
+  }
+}
+
+variable "session_manager_policy_arn" {
+  description = "SessionManager接続権限を含んだIAMポリシーARN (Bastion/NATインスタンスロールへアタッチ)"
+  type        = string
+}
