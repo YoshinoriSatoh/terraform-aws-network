@@ -179,7 +179,7 @@ module "nat_instance" {
     }
   }
   multi_az = var.nat_multi_az
-  session_manager_policy_arn = module.session_manager.session_manager_policy.arn
+  session_manager_policy_arn = var.session_manager_policy_arn
   public_key_path = var.public_key_paths.nat
 }
 
