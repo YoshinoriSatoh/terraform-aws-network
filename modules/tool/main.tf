@@ -34,7 +34,7 @@ locals {
 }
 
 resource "aws_instance" "tool" {
-  ami                    = var.ami
+  ami                    = local.ami
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
   iam_instance_profile   = aws_iam_instance_profile.tool.id
