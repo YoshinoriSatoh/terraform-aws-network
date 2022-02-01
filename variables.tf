@@ -46,7 +46,7 @@ variable "subnets" {
         cidr_block = string
       })
     })
-    tooling = object({
+    tool = object({
       cidr_block = string
     })
   })
@@ -75,7 +75,7 @@ variable "subnets" {
         cidr_block = "10.0.28.0/22"
       }
     }
-    tooling = {
+    tool = {
       cidr_block = "10.0.36.0/22"
     }
   }
@@ -110,15 +110,23 @@ variable "nat_multi_az" {
   default = false
 }
 
+variable "tool_enabled" {
+  description = "toolリソース有無を指定します"
+  type = bool
+  default = false
+}
+
 variable "public_key_paths" {
   description = "Bastion/NATインスタンスのキーペアのパブリックキーファイルパス. 呼び出し側でSSHキーを生成の上、ファイルパスを指定してください。"
   type        = object({
     bastion = string
     nat = string
+    tool = string
   })
   default = {
     bastion = "./key_pairs/bastion.pub"
     nat = "./key_pairs/nat_instance.pub"
+    tool = "./key_pairs/tool.pub"
   }
 }
 

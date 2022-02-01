@@ -3,7 +3,7 @@
  *
  * VPCにNATインスタンスを作成し、以下サブネットのルートテーブルにNATインスタンスへのルーティングを追加します。
  * * application
- * * tooling
+ * * tool
  */
 
 data "aws_ami" "nat" {
@@ -124,10 +124,10 @@ resource "aws_route_table_association" "application_c" {
   route_table_id = var.multi_az ? aws_route_table.application_c.id : aws_route_table.application_a.id
 }
 
-resource "aws_route_table" "tooling" {
+resource "aws_route_table" "tool" {
   vpc_id = var.vpc_id
   tags = {
-    Name = "${var.tf.fullname}-tooling"
+    Name = "${var.tf.fullname}-tool"
   }
 
   route {
@@ -136,9 +136,9 @@ resource "aws_route_table" "tooling" {
   }
 }
 
-resource "aws_route_table_association" "tooling" {
-  subnet_id      = var.routing_subnets.tooling.id
-  route_table_id = aws_route_table.tooling.id
+resource "aws_route_table_association" "tool" {
+  subnet_id      = var.routing_subnets.tool.id
+  route_table_id = aws_route_table.tool.id
 }
 
 resource "aws_iam_role" "nat_instance" {
@@ -186,7 +186,7 @@ resource "aws_security_group" "nat_instance" {
     cidr_blocks = [
       var.routing_subnets.application.a.cidr_block,
       var.routing_subnets.application.c.cidr_block,
-      var.routing_subnets.tooling.cidr_block
+      var.routing_subnets.tool.cidr_block
     ]
   }
 

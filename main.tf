@@ -12,7 +12,7 @@
  * |  public       |  ALB等インターネットへ公開するリソースを配置  |
  * |  application  |  稼働時及びデプロイ時にインターネットアウトバウンドが必要なアプリケーションを配置（インターネットアウトバウンド自体は別途構成が必要）   |
  * |  database     |  RDSやElastiCache等のリソースを配置（インターネットアウトバウンドなし）  |
- * |  tooling      |  AWSリソース、アプリケーションサーバ等に対するCLIによる操作等、アプリケーションワークロード以外で必要なリソースを配置（メンテナンス用のEC2インスタンスなど）（インターネットアウトバウンドなし）  |
+ * |  tool      |  AWSリソース、アプリケーションサーバ等に対するCLIによる操作等、アプリケーションワークロード以外で必要なリソースを配置（メンテナンス用のEC2インスタンスなど）（インターネットアウトバウンドなし）  |
  */
 
 data "aws_caller_identity" "current" {}
@@ -127,13 +127,13 @@ resource "aws_route_table_association" "database_c" {
   route_table_id = aws_route_table.database.id
 }
 
-# --- tooling subnet ---
-resource "aws_subnet" "tooling" {
+# --- tool subnet ---
+resource "aws_subnet" "tool" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}a"
-  cidr_block        = var.subnets.tooling.cidr_block
+  cidr_block        = var.subnets.tool.cidr_block
   tags = {
-    Name = "${var.tf.fullname}-tooling"
+    Name = "${var.tf.fullname}-tool"
   }
 }
 
@@ -173,9 +173,9 @@ module "nat_instance" {
         cidr_block = aws_subnet.application_c.cidr_block
       }
     }
-    tooling = {
-      id         = aws_subnet.tooling.id
-      cidr_block = aws_subnet.tooling.cidr_block
+    tool = {
+      id         = aws_subnet.tool.id
+      cidr_block = aws_subnet.tool.cidr_block
     }
   }
   multi_az = var.nat_multi_az
@@ -208,10 +208,22 @@ module "network_nat_gateway" {
         cidr_block = aws_subnet.application_c.cidr_block
       }
     }
-    tooling = {
-      id         = aws_subnet.tooling.id
-      cidr_block = aws_subnet.tooling.cidr_block
+    tool = {
+      id         = aws_subnet.tool.id
+      cidr_block = aws_subnet.tool.cidr_block
     }
   }
   multi_az = var.nat_multi_az
 }
+
+# --- tool instance ---
+module "tool" {
+  count  = var.tool_enabled ? 1 : 0
+  source  = "./modules/tool"
+  tf      = var.tf
+  vpc_id = aws_vpc.main.id
+  subnet_id = aws_subnet.public_a.id
+  session_manager_policy_arn = var.session_manager_policy_arn
+  public_key_path = var.public_key_paths.tool
+}
+

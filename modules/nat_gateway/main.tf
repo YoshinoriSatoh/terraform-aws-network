@@ -3,7 +3,7 @@
  *
  * VPCにNATゲートウェイを作成し、以下サブネットのルートテーブルにNATインスタンスへのルーティングを追加します。
  * * application
- * * tooling
+ * * tool
  */
 
 resource "aws_nat_gateway" "nat_a" {
@@ -69,10 +69,10 @@ resource "aws_route_table_association" "application_c" {
   route_table_id = aws_route_table.application_c[0].id
 }
 
-resource "aws_route_table" "tooling" {
+resource "aws_route_table" "tool" {
   vpc_id = var.vpc_id
   tags = {
-    Name = "${var.tf.fullname}-tooling"
+    Name = "${var.tf.fullname}-tool"
   }
 
   route {
@@ -81,7 +81,7 @@ resource "aws_route_table" "tooling" {
   }
 }
 
-resource "aws_route_table_association" "tooling" {
-  subnet_id      = var.routing_subnets.tooling.id
-  route_table_id = aws_route_table.tooling.id
+resource "aws_route_table_association" "tool" {
+  subnet_id      = var.routing_subnets.tool.id
+  route_table_id = aws_route_table.tool.id
 }

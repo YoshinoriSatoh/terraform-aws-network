@@ -10,12 +10,12 @@ variable "tf" {
 }
 
 variable "vpc_id" {
-  description = "Toolingインスタンスを起動するVPC ID"
+  description = "toolインスタンスを起動するVPC ID"
   type        = string
 }
 
 variable "subnet_id" {
-  description = "Toolingインスタンスを起動するサブネットID"
+  description = "toolインスタンスを起動するサブネットID"
   type        = string
 }
 
@@ -28,7 +28,7 @@ variable "ami" {
 variable "instance_type" {
   description = "インスタンスタイプ"
   type = string
-  default = "t3.nano" 
+  default = "t4g.nano" 
 }
 
 variable "enable_spot_instance" {

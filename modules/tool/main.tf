@@ -1,5 +1,5 @@
 /**
- * # Terraform AWS Tooling instance Module
+ * # Terraform AWS tool instance Module
  *
  * アプリケーションサーバやDBに対して手動でコマンド実行等を実施するためのEC2インスタンスを作成します。
  * AMIはデフォルトでAmazonLinux2(Arm64)の最新版を使用します。

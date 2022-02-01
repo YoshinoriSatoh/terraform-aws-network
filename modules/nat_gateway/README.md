@@ -3,7 +3,7 @@
 
 VPCにNATゲートウェイを作成し、以下サブネットのルートテーブルにNATインスタンスへのルーティングを追加します。
 * application
-* tooling
+* tool
 
 ## Requirements
 
@@ -32,10 +32,10 @@ No modules.
 | [aws_nat_gateway.nat_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/nat_gateway) | resource |
 | [aws_route_table.application_a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table) | resource |
 | [aws_route_table.application_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table) | resource |
-| [aws_route_table.tooling](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table) | resource |
+| [aws_route_table.tool](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table) | resource |
 | [aws_route_table_association.application_a](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
 | [aws_route_table_association.application_c](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
-| [aws_route_table_association.tooling](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
+| [aws_route_table_association.tool](https://registry.terraform.io/providers/hashicorp/aws/3.74.0/docs/resources/route_table_association) | resource |
 
 ## Inputs
 
@@ -43,7 +43,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_multi_az"></a> [multi\_az](#input\_multi\_az) | NATインスタンスの冗長化 | `bool` | `false` | no |
 | <a name="input_public_subnets"></a> [public\_subnets](#input\_public\_subnets) | NATインスタンスを起動するサブネットID | <pre>object({<br>    a = object({<br>      id = string<br>    })<br>    c = object({<br>      id = string<br>    })<br>  })</pre> | n/a | yes |
-| <a name="input_routing_subnets"></a> [routing\_subnets](#input\_routing\_subnets) | NATルーティング対象のサブネットID | <pre>object({<br>    application = object({<br>      a = object({<br>        id         = string<br>        cidr_block = string<br>      })<br>      c = object({<br>        id         = string<br>        cidr_block = string<br>      })<br>    })<br>    tooling = object({<br>      id         = string<br>      cidr_block = string<br>    })<br>  })</pre> | n/a | yes |
+| <a name="input_routing_subnets"></a> [routing\_subnets](#input\_routing\_subnets) | NATルーティング対象のサブネットID | <pre>object({<br>    application = object({<br>      a = object({<br>        id         = string<br>        cidr_block = string<br>      })<br>      c = object({<br>        id         = string<br>        cidr_block = string<br>      })<br>    })<br>    tool = object({<br>      id         = string<br>      cidr_block = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_tf"></a> [tf](#input\_tf) | Terraformアプリケーション情報 | <pre>object({<br>    name          = string<br>    shortname     = string<br>    env           = string<br>    fullname      = string<br>    fullshortname = string<br>  })</pre> | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | NATインスタンスを起動するVPC ID | `string` | n/a | yes |
 

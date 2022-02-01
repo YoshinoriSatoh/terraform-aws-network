@@ -39,7 +39,7 @@ variable "routing_subnets" {
         cidr_block = string
       })
     })
-    tooling = object({
+    tool = object({
       id         = string
       cidr_block = string
     })

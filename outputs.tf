@@ -57,7 +57,7 @@ output "subnet_database_ids" {
   ]
 }
 
-output "subnet_tooling" {
-  description = "Tooling subnet of availavitity zone A. (availavitity zone A only)"
-  value = aws_subnet.tooling
+output "subnet_tool" {
+  description = "tool subnet of availavitity zone A. (availavitity zone A only)"
+  value = aws_subnet.tool
 }
