@@ -81,8 +81,31 @@ variable "subnets" {
   }
 }
 
-variable "multi_az" {
-  description = "NATインスタンス/ゲートウェイを冗長化します（Bastionインスタンスは冗長化しません）"
+variable "bastion_enabled" {
+  description = "Bastionインスタンスの有無を指定します"
+  type = bool
+  default = false
+}
+
+variable "nat_enabled" {
+  description = "NAT構成の有無を指定します"
+  type = bool
+  default = false
+}
+
+variable "nat_type" {
+  description = "NAT構成を有効化する場合に、NATインスタンス or NATゲートウェイを指定します"
+  type = string
+  default = "instance"
+
+  validation {
+    condition = contain(["instance", "gateway"], var.nat_type)
+    error_message = "Allowed values for nat_type are \"instance\" or \"gateway\"."
+  }
+}
+
+variable "nat_multi_az" {
+  description = "NATインスタンス or ゲートウェイを冗長化します"
   type = bool
   default = false
 }
