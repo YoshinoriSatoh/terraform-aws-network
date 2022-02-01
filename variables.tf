@@ -99,7 +99,7 @@ variable "nat_type" {
   default = "instance"
 
   validation {
-    condition = contain(["instance", "gateway"], var.nat_type)
+    condition = contains(["instance", "gateway"], var.nat_type)
     error_message = "Allowed values for nat_type are \"instance\" or \"gateway\"."
   }
 }
