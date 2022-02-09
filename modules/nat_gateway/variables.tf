@@ -11,7 +11,7 @@ variable "tf" {
 
 variable "vpc_id" {
   description = "NATインスタンスを起動するVPC ID"
-  type = string
+  type        = string
 }
 
 variable "public_subnets" {
@@ -48,6 +48,6 @@ variable "routing_subnets" {
 
 variable "multi_az" {
   description = "NATインスタンスの冗長化"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }

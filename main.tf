@@ -128,7 +128,7 @@ resource "aws_route_table_association" "database_c" {
 }
 
 resource "aws_db_subnet_group" "main" {
-  name       = var.tf.fullname
+  name        = var.tf.fullname
   description = var.tf.fullname
   subnet_ids = [
     aws_subnet.database_a.id,
@@ -157,21 +157,21 @@ resource "aws_subnet" "tool" {
 
 # --- bastion instance ---
 module "bastion" {
-  count  = var.bastion_enabled ? 1 : 0
-  source  = "./modules/bastion"
-  tf      = var.tf
-  vpc_id = aws_vpc.main.id
-  subnet_id = aws_subnet.public_a.id
+  count                      = var.bastion_enabled ? 1 : 0
+  source                     = "./modules/bastion"
+  tf                         = var.tf
+  vpc_id                     = aws_vpc.main.id
+  subnet_id                  = aws_subnet.public_a.id
   session_manager_policy_arn = var.session_manager_policy_arn
-  public_key_path = var.public_key_paths.bastion
-  in_development = var.in_development
+  public_key_path            = var.public_key_paths.bastion
+  in_development             = var.in_development
 }
 
 # --- nat instance ---
 module "nat_instance" {
   count  = var.nat_enabled && var.nat_type == "instance" ? 1 : 0
-  source  = "./modules/nat_instance"
-  tf      = var.tf
+  source = "./modules/nat_instance"
+  tf     = var.tf
   vpc_id = aws_vpc.main.id
   public_subnets = {
     a = {
@@ -197,17 +197,17 @@ module "nat_instance" {
       cidr_block = aws_subnet.tool.cidr_block
     }
   }
-  multi_az = var.nat_multi_az
+  multi_az                   = var.nat_multi_az
   session_manager_policy_arn = var.session_manager_policy_arn
-  public_key_path = var.public_key_paths.nat
-  in_development = var.in_development
+  public_key_path            = var.public_key_paths.nat
+  in_development             = var.in_development
 }
 
 # --- nat gateway ---
 module "network_nat_gateway" {
   count  = var.nat_enabled && var.nat_type == "gateway" ? 1 : 0
-  source  = "./modules/nat_gateway"
-  tf      = var.tf
+  source = "./modules/nat_gateway"
+  tf     = var.tf
   vpc_id = aws_vpc.main.id
   public_subnets = {
     a = {
@@ -238,13 +238,13 @@ module "network_nat_gateway" {
 
 # --- tool instance ---
 module "tool" {
-  count  = var.tool_enabled ? 1 : 0
-  source  = "./modules/tool"
-  tf      = var.tf
-  vpc_id = aws_vpc.main.id
-  subnet_id = aws_subnet.public_a.id
+  count                      = var.tool_enabled ? 1 : 0
+  source                     = "./modules/tool"
+  tf                         = var.tf
+  vpc_id                     = aws_vpc.main.id
+  subnet_id                  = aws_subnet.public_a.id
   session_manager_policy_arn = var.session_manager_policy_arn
-  public_key_path = var.public_key_paths.tool
-  in_development = var.in_development
+  public_key_path            = var.public_key_paths.tool
+  in_development             = var.in_development
 }
 

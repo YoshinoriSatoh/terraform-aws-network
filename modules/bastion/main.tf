@@ -30,12 +30,12 @@ data "aws_ami" "bastion" {
 }
 
 resource "aws_instance" "bastion" {
-  ami                    = data.aws_ami.bastion.image_id
-  instance_type          = var.instance_type
-  subnet_id              = var.subnet_id
-  iam_instance_profile   = aws_iam_instance_profile.bastion.id
-  vpc_security_group_ids = [aws_security_group.bastion.id]
-  key_name               = aws_key_pair.bastion.key_name
+  ami                     = data.aws_ami.bastion.image_id
+  instance_type           = var.instance_type
+  subnet_id               = var.subnet_id
+  iam_instance_profile    = aws_iam_instance_profile.bastion.id
+  vpc_security_group_ids  = [aws_security_group.bastion.id]
+  key_name                = aws_key_pair.bastion.key_name
   disable_api_termination = !var.in_development
   tags = {
     Name = "${var.tf.fullname}-bastion"

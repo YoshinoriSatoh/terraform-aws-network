@@ -10,14 +10,14 @@ variable "tf" {
 }
 
 variable "in_development" {
-  description = "Terraform構築検証モード（各種リソースの削除保護が無効化されます）" 
-  type = bool
-  default = false
+  description = "Terraform構築検証モード（各種リソースの削除保護が無効化されます）"
+  type        = bool
+  default     = false
 }
 
 variable "vpc_id" {
   description = "NATインスタンスを起動するVPC ID"
-  type = string
+  type        = string
 }
 
 variable "public_subnets" {
@@ -54,26 +54,26 @@ variable "routing_subnets" {
 
 variable "ami" {
   description = "NATインスタンスAMI"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "instance_type" {
   description = "NATインスタンスタイプ"
-  type = string
-  default = "t3.nano" 
+  type        = string
+  default     = "t3.nano"
 }
 
 variable "multi_az" {
   description = "NATインスタンスの冗長化"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "public_key_path" {
   description = "Bastionインスタンスのキーペアのパブリックキーファイルパス. 呼び出し側でSSHキーを生成の上、ファイルパスを指定してください。"
   type        = string
-  default = "./key_pairs/nat_instance.pub"
+  default     = "./key_pairs/nat_instance.pub"
 }
 
 variable "session_manager_policy_arn" {
