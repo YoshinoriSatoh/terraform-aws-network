@@ -67,7 +67,7 @@ output "db_subnet_group_main" {
   value = aws_db_subnet_group.main
 }
 
-output "aws_elasticache_subnet_group" {
+output "aws_elasticache_subnet_group_main" {
   description = "main elasticache subnet group"
   value = aws_elasticache_subnet_group.main
 }
