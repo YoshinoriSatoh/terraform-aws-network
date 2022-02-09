@@ -61,3 +61,13 @@ output "subnet_tool" {
   description = "tool subnet of availavitity zone A. (availavitity zone A only)"
   value = aws_subnet.tool
 }
+
+output "db_subnet_group_main" {
+  description = "main rds subnet group"
+  value = aws_db_subnet_group.main
+}
+
+output "aws_elasticache_subnet_group" {
+  description = "main elasticache subnet group"
+  value = aws_elasticache_subnet_group.main
+}

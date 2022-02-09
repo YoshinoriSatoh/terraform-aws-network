@@ -127,6 +127,24 @@ resource "aws_route_table_association" "database_c" {
   route_table_id = aws_route_table.database.id
 }
 
+resource "aws_db_subnet_group" "main" {
+  name       = var.tf.fullname
+  description = var.tf.fullname
+  subnet_ids = [
+    aws_subnet.database_a.id,
+    aws_subnet.database_c.id
+  ]
+}
+
+resource "aws_elasticache_subnet_group" "main" {
+  name        = var.tf.fullname
+  description = var.tf.fullname
+  subnet_ids = [
+    aws_subnet.database_a.id,
+    aws_subnet.database_c.id
+  ]
+}
+
 # --- tool subnet ---
 resource "aws_subnet" "tool" {
   vpc_id            = aws_vpc.main.id
