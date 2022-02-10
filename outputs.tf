@@ -77,12 +77,12 @@ output "nat_instance_security_group" {
   value       = module.nat_instance[0] != null ? module.nat_instance[0].security_group : null
 }
 
-output "bastion_security_group" {
-  description = "Bastion instance security group"
-  value       = module.bastion[0] != null ? module.bastion[0].security_group : null
-}
+# output "bastion_security_group" {
+#   description = "Bastion instance security group"
+#   value       = module.bastion[0] != null ? module.bastion[0].security_group : null
+# }
 
-output "tool_security_group" {
-  description = "Tool instance security group"
-  value       = module.tool[0] != null ? module.tool[0].security_group : null
-}
+# output "tool_security_group" {
+#   description = "Tool instance security group"
+#   value       = module.tool[0] != null ? module.tool[0].security_group : null
+# }
