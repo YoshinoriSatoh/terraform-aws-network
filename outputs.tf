@@ -79,10 +79,10 @@ output "nat_instance_security_group" {
 
 output "bastion_security_group" {
   description = "Bastion instance security group"
-  value       = module.bastion.security_group != null ? module.bastion.security_group : null
+  value       = module.bastion != null ? module.bastion.security_group : null
 }
 
 output "tool_security_group" {
   description = "Tool instance security group"
-  value       = module.tool.security_group != null ? module.tool.security_group : null
+  value       = module.tool != null ? module.tool.security_group : null
 }
