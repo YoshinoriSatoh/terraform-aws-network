@@ -71,3 +71,18 @@ output "aws_elasticache_subnet_group_main" {
   description = "main elasticache subnet group"
   value       = aws_elasticache_subnet_group.main
 }
+
+output "nat_instance_security_group" {
+  description = "NAT instance security group"
+  value       = module.nat_instance != null ? module.nat_instance.security_group : null
+}
+
+output "bastion_security_group" {
+  description = "Bastion instance security group"
+  value       = module.bastion.security_group != null ? module.bastion.security_group : null
+}
+
+output "tool_security_group" {
+  description = "Tool instance security group"
+  value       = module.tool.security_group != null ? module.tool.security_group : null
+}
