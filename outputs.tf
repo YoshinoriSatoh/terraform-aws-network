@@ -74,7 +74,7 @@ output "aws_elasticache_subnet_group_main" {
 
 output "nat_instance_security_group" {
   description = "NAT instance security group"
-  value       = module.nat_instance != null ? module.nat_instance[0].security_group : null
+  value       = var.nat_enabled ? module.nat_instance[0].security_group : null
   # value       = module.nat_instance[0].security_group
 }
 
