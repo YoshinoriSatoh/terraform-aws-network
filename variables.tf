@@ -36,24 +36,13 @@ variable "subnets" {
         cidr_block = string
       })
     })
-    application = object({
+    private = object({
       a = object({
         cidr_block = string
       })
       c = object({
         cidr_block = string
       })
-    })
-    database = object({
-      a = object({
-        cidr_block = string
-      })
-      c = object({
-        cidr_block = string
-      })
-    })
-    tool = object({
-      cidr_block = string
     })
   })
   default = {
@@ -65,24 +54,13 @@ variable "subnets" {
         cidr_block = "10.0.4.0/22"
       }
     }
-    application = {
+    private = {
       a = {
         cidr_block = "10.0.12.0/22"
       }
       c = {
         cidr_block = "10.0.16.0/22"
       }
-    }
-    database = {
-      a = {
-        cidr_block = "10.0.24.0/22"
-      }
-      c = {
-        cidr_block = "10.0.28.0/22"
-      }
-    }
-    tool = {
-      cidr_block = "10.0.36.0/22"
     }
   }
 }
