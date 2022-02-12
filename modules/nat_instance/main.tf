@@ -1,9 +1,7 @@
 /**
  * # Terraform AWS Network NAT Instance module
  *
- * VPCにNATインスタンスを作成し、以下サブネットのルートテーブルにNATインスタンスへのルーティングを追加します。
- * * application
- * * tool
+ * VPCにNATインスタンスを作成し、privateサブネットのルートテーブルにNATインスタンスへのルーティングを追加します。
  */
 
 data "aws_ami" "nat" {
@@ -90,10 +88,10 @@ resource "aws_iam_instance_profile" "nat" {
   role = aws_iam_role.nat_instance.name
 }
 
-resource "aws_route_table" "application_a" {
+resource "aws_route_table" "private_a" {
   vpc_id = var.vpc_id
   tags = {
-    Name = "${var.tf.fullname}-application-a"
+    Name = "${var.tf.fullname}-private-a"
   }
 
   route {
@@ -102,15 +100,15 @@ resource "aws_route_table" "application_a" {
   }
 }
 
-resource "aws_route_table_association" "application_a" {
-  subnet_id      = var.routing_subnets.application.a.id
-  route_table_id = aws_route_table.application_a.id
+resource "aws_route_table_association" "private_a" {
+  subnet_id      = var.routing_subnets.private.a.id
+  route_table_id = aws_route_table.private_a.id
 }
 
-resource "aws_route_table" "application_c" {
+resource "aws_route_table" "private_c" {
   vpc_id = var.vpc_id
   tags = {
-    Name = "${var.tf.fullname}-application-c"
+    Name = "${var.tf.fullname}-private-c"
   }
 
   route {
@@ -119,9 +117,9 @@ resource "aws_route_table" "application_c" {
   }
 }
 
-resource "aws_route_table_association" "application_c" {
-  subnet_id      = var.routing_subnets.application.c.id
-  route_table_id = var.multi_az ? aws_route_table.application_c.id : aws_route_table.application_a.id
+resource "aws_route_table_association" "private_c" {
+  subnet_id      = var.routing_subnets.private.c.id
+  route_table_id = var.multi_az ? aws_route_table.private_c.id : aws_route_table.private_a.id
 }
 
 resource "aws_route_table" "tool" {
@@ -184,8 +182,8 @@ resource "aws_security_group" "nat_instance" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = [
-      var.routing_subnets.application.a.cidr_block,
-      var.routing_subnets.application.c.cidr_block,
+      var.routing_subnets.private.a.cidr_block,
+      var.routing_subnets.private.c.cidr_block,
       var.routing_subnets.tool.cidr_block
     ]
   }

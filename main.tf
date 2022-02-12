@@ -143,10 +143,6 @@ module "nat_instance" {
         cidr_block = aws_subnet.private_c.cidr_block
       }
     }
-    tool = {
-      id         = aws_subnet.tool.id
-      cidr_block = aws_subnet.tool.cidr_block
-    }
   }
   multi_az                   = var.nat_multi_az
   session_manager_policy_arn = var.session_manager_policy_arn
@@ -178,10 +174,6 @@ module "network_nat_gateway" {
         id         = aws_subnet.private_c.id
         cidr_block = aws_subnet.private_c.cidr_block
       }
-    }
-    tool = {
-      id         = aws_subnet.tool.id
-      cidr_block = aws_subnet.tool.cidr_block
     }
   }
   multi_az = var.nat_multi_az

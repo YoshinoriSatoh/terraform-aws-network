@@ -29,7 +29,7 @@ variable "public_subnets" {
 variable "routing_subnets" {
   description = "NATルーティング対象のサブネットID"
   type = object({
-    application = object({
+    private = object({
       a = object({
         id         = string
         cidr_block = string
@@ -38,10 +38,6 @@ variable "routing_subnets" {
         id         = string
         cidr_block = string
       })
-    })
-    tool = object({
-      id         = string
-      cidr_block = string
     })
   })
 }
