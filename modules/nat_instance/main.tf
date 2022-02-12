@@ -122,23 +122,6 @@ resource "aws_route_table_association" "private_c" {
   route_table_id = var.multi_az ? aws_route_table.private_c.id : aws_route_table.private_a.id
 }
 
-resource "aws_route_table" "tool" {
-  vpc_id = var.vpc_id
-  tags = {
-    Name = "${var.tf.fullname}-tool"
-  }
-
-  route {
-    cidr_block  = "0.0.0.0/0"
-    instance_id = aws_instance.nat_a.id
-  }
-}
-
-resource "aws_route_table_association" "tool" {
-  subnet_id      = var.routing_subnets.tool.id
-  route_table_id = aws_route_table.tool.id
-}
-
 resource "aws_iam_role" "nat_instance" {
   name               = "${var.tf.fullname}-nat-instance"
   path               = "/"
@@ -184,7 +167,6 @@ resource "aws_security_group" "nat_instance" {
     cidr_blocks = [
       var.routing_subnets.private.a.cidr_block,
       var.routing_subnets.private.c.cidr_block,
-      var.routing_subnets.tool.cidr_block
     ]
   }
 

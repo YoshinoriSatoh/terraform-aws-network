@@ -66,20 +66,3 @@ resource "aws_route_table_association" "private_c" {
   subnet_id      = var.routing_subnets.private.c.id
   route_table_id = aws_route_table.private_c[0].id
 }
-
-resource "aws_route_table" "tool" {
-  vpc_id = var.vpc_id
-  tags = {
-    Name = "${var.tf.fullname}-tool"
-  }
-
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat_a.id
-  }
-}
-
-resource "aws_route_table_association" "tool" {
-  subnet_id      = var.routing_subnets.tool.id
-  route_table_id = aws_route_table.tool.id
-}

@@ -92,8 +92,8 @@ resource "aws_db_subnet_group" "main" {
   name        = var.tf.fullname
   description = var.tf.fullname
   subnet_ids = [
-    aws_subnet.private.id,
-    aws_subnet.private.id
+    aws_subnet.private_a.id,
+    aws_subnet.private_c.id
   ]
 }
 
@@ -101,8 +101,8 @@ resource "aws_elasticache_subnet_group" "main" {
   name        = var.tf.fullname
   description = var.tf.fullname
   subnet_ids = [
-    aws_subnet.private.id,
-    aws_subnet.private.id
+    aws_subnet.private_a.id,
+    aws_subnet.private_c.id
   ]
 }
 
