@@ -9,10 +9,8 @@
  * 一つのVPC内に以下サブネット群を構築します。
  * |  サブネット名   |  用途など  |
  * | ----          | ---- |
- * |  public       |  ALB等インターネットへ公開するリソースを配置  |
- * |  application  |  稼働時及びデプロイ時にインターネットアウトバウンドが必要なアプリケーションを配置（インターネットアウトバウンド自体は別途構成が必要）   |
- * |  database     |  RDSやElastiCache等のリソースを配置（インターネットアウトバウンドなし）  |
- * |  tool      |  AWSリソース、アプリケーションサーバ等に対するCLIによる操作等、アプリケーションワークロード以外で必要なリソースを配置（メンテナンス用のEC2インスタンスなど）（インターネットアウトバウンドなし）  |
+ * |  public       |  インターネットインバウンド/アウトバウンドを持つ  |
+ * |  private      |  インターネットインバウンドがなく、NATによってインターネットアウトバウンドを構成する（NAT自体は別途構成が必要）   |
  */
 
 data "aws_caller_identity" "current" {}
@@ -72,67 +70,30 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 }
 
-# --- application subnet ---
-resource "aws_subnet" "application_a" {
+# --- private subnet ---
+resource "aws_subnet" "private_a" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}a"
-  cidr_block        = var.subnets.application.a.cidr_block
+  cidr_block        = var.subnets.private.a.cidr_block
   tags = {
-    Name = "${var.tf.fullname}-application-a"
+    Name = "${var.tf.fullname}-private-a"
   }
 }
 
-resource "aws_subnet" "application_c" {
+resource "aws_subnet" "private_c" {
   vpc_id            = aws_vpc.main.id
   availability_zone = "${data.aws_region.current.name}c"
-  cidr_block        = var.subnets.application.c.cidr_block
+  cidr_block        = var.subnets.private.c.cidr_block
   tags = {
-    Name = "${var.tf.fullname}-application-c"
+    Name = "${var.tf.fullname}-private-c"
   }
 }
-
-# --- database subnet ---
-resource "aws_subnet" "database_a" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = "${data.aws_region.current.name}a"
-  cidr_block        = var.subnets.database.a.cidr_block
-  tags = {
-    Name = "${var.tf.fullname}-database-a"
-  }
-}
-
-resource "aws_subnet" "database_c" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = "${data.aws_region.current.name}c"
-  cidr_block        = var.subnets.database.c.cidr_block
-  tags = {
-    Name = "${var.tf.fullname}-database-c"
-  }
-}
-
-resource "aws_route_table" "database" {
-  vpc_id = aws_vpc.main.id
-  tags = {
-    Name = "${var.tf.fullname}-database"
-  }
-}
-
-resource "aws_route_table_association" "database_a" {
-  subnet_id      = aws_subnet.database_a.id
-  route_table_id = aws_route_table.database.id
-}
-
-resource "aws_route_table_association" "database_c" {
-  subnet_id      = aws_subnet.database_c.id
-  route_table_id = aws_route_table.database.id
-}
-
 resource "aws_db_subnet_group" "main" {
   name        = var.tf.fullname
   description = var.tf.fullname
   subnet_ids = [
-    aws_subnet.database_a.id,
-    aws_subnet.database_c.id
+    aws_subnet.private.id,
+    aws_subnet.private.id
   ]
 }
 
@@ -140,19 +101,9 @@ resource "aws_elasticache_subnet_group" "main" {
   name        = var.tf.fullname
   description = var.tf.fullname
   subnet_ids = [
-    aws_subnet.database_a.id,
-    aws_subnet.database_c.id
+    aws_subnet.private.id,
+    aws_subnet.private.id
   ]
-}
-
-# --- tool subnet ---
-resource "aws_subnet" "tool" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = "${data.aws_region.current.name}a"
-  cidr_block        = var.subnets.tool.cidr_block
-  tags = {
-    Name = "${var.tf.fullname}-tool"
-  }
 }
 
 # --- bastion instance ---
@@ -182,14 +133,14 @@ module "nat_instance" {
     }
   }
   routing_subnets = {
-    application = {
+    private = {
       a = {
-        id         = aws_subnet.application_a.id
-        cidr_block = aws_subnet.application_a.cidr_block
+        id         = aws_subnet.private_a.id
+        cidr_block = aws_subnet.private_a.cidr_block
       }
       c = {
-        id         = aws_subnet.application_c.id
-        cidr_block = aws_subnet.application_c.cidr_block
+        id         = aws_subnet.private_c.id
+        cidr_block = aws_subnet.private_c.cidr_block
       }
     }
     tool = {
@@ -218,14 +169,14 @@ module "network_nat_gateway" {
     }
   }
   routing_subnets = {
-    application = {
+    private = {
       a = {
-        id         = aws_subnet.application_a.id
-        cidr_block = aws_subnet.application_a.cidr_block
+        id         = aws_subnet.private_a.id
+        cidr_block = aws_subnet.private_a.cidr_block
       }
       c = {
-        id         = aws_subnet.application_c.id
-        cidr_block = aws_subnet.application_c.cidr_block
+        id         = aws_subnet.private_c.id
+        cidr_block = aws_subnet.private_c.cidr_block
       }
     }
     tool = {
