@@ -35,17 +35,17 @@ resource "aws_instance" "bastion" {
   subnet_id               = var.subnet_id
   iam_instance_profile    = aws_iam_instance_profile.bastion.id
   vpc_security_group_ids  = [aws_security_group.bastion.id]
-  key_name                = aws_key_pair.bastion.key_name
+  # key_name                = aws_key_pair.bastion.key_name
   disable_api_termination = !var.in_development
   tags = {
     Name = "${var.tf.fullname}-bastion"
   }
 }
 
-resource "aws_key_pair" "bastion" {
-  key_name   = "${var.tf.fullname}-bastion"
-  public_key = file(var.public_key_path)
-}
+# resource "aws_key_pair" "bastion" {
+#   key_name   = "${var.tf.fullname}-bastion"
+#   public_key = file(var.public_key_path)
+# }
 
 resource "aws_iam_instance_profile" "bastion" {
   name = "${var.tf.fullname}-bastion"

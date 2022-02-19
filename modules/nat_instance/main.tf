@@ -35,7 +35,7 @@ resource "aws_instance" "nat_a" {
   associate_public_ip_address = true
   iam_instance_profile        = aws_iam_instance_profile.nat.id
   vpc_security_group_ids      = [aws_security_group.nat_instance.id]
-  key_name                    = aws_key_pair.instance.key_name
+  # key_name                    = aws_key_pair.instance.key_name
   source_dest_check           = false
   disable_api_termination     = !var.in_development
   tags = {
@@ -60,7 +60,7 @@ resource "aws_instance" "nat_c" {
   associate_public_ip_address = true
   iam_instance_profile        = aws_iam_instance_profile.nat.id
   vpc_security_group_ids      = [aws_security_group.nat_instance.id]
-  key_name                    = aws_key_pair.instance.key_name
+  # key_name                    = aws_key_pair.instance.key_name
   source_dest_check           = false
   disable_api_termination     = !var.in_development
   tags = {
@@ -78,10 +78,10 @@ resource "aws_eip" "nat_instance_c" {
   }
 }
 
-resource "aws_key_pair" "instance" {
-  key_name   = "${var.tf.fullname}-instance"
-  public_key = file(var.public_key_path)
-}
+# resource "aws_key_pair" "instance" {
+#   key_name   = "${var.tf.fullname}-instance"
+#   public_key = file(var.public_key_path)
+# }
 
 resource "aws_iam_instance_profile" "nat" {
   name = "${var.tf.fullname}-nat"

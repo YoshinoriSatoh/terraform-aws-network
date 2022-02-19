@@ -43,11 +43,11 @@ variable "enable_spot_instance" {
   default     = true
 }
 
-variable "public_key_path" {
-  description = "Bastionインスタンスのキーペアのパブリックキーファイルパス. 呼び出し側でSSHキーを生成の上、ファイルパスを指定してください。"
-  type        = string
-  default     = "./key_pairs/bastion.pub"
-}
+# variable "public_key_path" {
+#   description = "Bastionインスタンスのキーペアのパブリックキーファイルパス. 呼び出し側でSSHキーを生成の上、ファイルパスを指定してください。"
+#   type        = string
+#   default     = "./key_pairs/bastion.pub"
+# }
 
 variable "session_manager_policy_arn" {
   description = "SessionManager接続権限を含んだIAMポリシーARN (Bastionインスタンスロールへアタッチ)"

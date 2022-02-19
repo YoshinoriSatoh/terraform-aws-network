@@ -39,17 +39,17 @@ resource "aws_instance" "tool" {
   subnet_id               = var.subnet_id
   iam_instance_profile    = aws_iam_instance_profile.tool.id
   vpc_security_group_ids  = [aws_security_group.tool.id]
-  key_name                = aws_key_pair.tool.key_name
+  # key_name                = aws_key_pair.tool.key_name
   disable_api_termination = !var.in_development
   tags = {
     Name = "${var.tf.fullname}-tool"
   }
 }
 
-resource "aws_key_pair" "tool" {
-  key_name   = "${var.tf.fullname}-tool"
-  public_key = file(var.public_key_path)
-}
+# resource "aws_key_pair" "tool" {
+#   key_name   = "${var.tf.fullname}-tool"
+#   public_key = file(var.public_key_path)
+# }
 
 resource "aws_iam_instance_profile" "tool" {
   name = "${var.tf.fullname}-tool"
