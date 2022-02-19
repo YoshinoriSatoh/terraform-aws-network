@@ -114,7 +114,6 @@ module "bastion" {
   vpc_id                     = aws_vpc.main.id
   subnet_id                  = aws_subnet.public_a.id
   session_manager_policy_arn = var.session_manager_policy_arn
-  public_key_path            = var.public_key_paths.bastion
   in_development             = var.in_development
 }
 
@@ -146,7 +145,6 @@ module "nat_instance" {
   }
   multi_az                   = var.nat_multi_az
   session_manager_policy_arn = var.session_manager_policy_arn
-  public_key_path            = var.public_key_paths.nat
   in_development             = var.in_development
 }
 
@@ -187,7 +185,6 @@ module "tool" {
   vpc_id                     = aws_vpc.main.id
   subnet_id                  = aws_subnet.public_a.id
   session_manager_policy_arn = var.session_manager_policy_arn
-  public_key_path            = var.public_key_paths.tool
   in_development             = var.in_development
 }
 
