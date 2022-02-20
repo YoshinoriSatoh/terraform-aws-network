@@ -3,17 +3,17 @@ output "vpc" {
   value       = aws_vpc.main
 }
 
-output "subnet_public_a" {
+output "public_subnet_a" {
   description = "Public subnet of availavitity zone A in main VPC. Has internet outbound."
   value       = aws_subnet.public_a
 }
 
-output "subnet_public_c" {
+output "public_subnet_c" {
   description = "Public subnet of availavitity zone C in main VPC. Has internet outbound."
   value       = aws_subnet.public_c
 }
 
-output "subnet_public_ids" {
+output "public_subnet_ids" {
   description = "A list of public subnet's id. For unconsciously availavirity zone."
   value = [
     aws_subnet.public_a.id,
@@ -21,17 +21,17 @@ output "subnet_public_ids" {
   ]
 }
 
-output "subnet_private_a" {
+output "private_subnet_a" {
   description = "private subnet of availavitity zone A in main VPC. Internet outbound creation is required, if you needed."
   value       = aws_subnet.private_a
 }
 
-output "subnet_private_c" {
+output "private_subnet_c" {
   description = "private subnet of availavitity zone C in main VPC. Internet outbound creation is required, if you needed."
   value       = aws_subnet.private_c
 }
 
-output "subnet_private_ids" {
+output "private_subnet_ids" {
   description = "A list of private subnet's id. For unconsciously availavirity zone."
   value = [
     aws_subnet.private_a.id,
