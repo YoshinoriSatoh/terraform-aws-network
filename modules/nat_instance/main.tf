@@ -95,8 +95,8 @@ resource "aws_route_table" "private_a" {
   }
 
   route {
-    cidr_block  = "0.0.0.0/0"
-    instance_id = aws_instance.nat_a.id
+    cidr_block           = "0.0.0.0/0"
+    network_interface_id = aws_instance.nat_a.id
   }
 }
 
