@@ -113,7 +113,7 @@ resource "aws_route_table" "private_c" {
 
   route {
     cidr_block  = "0.0.0.0/0"
-    instance_id = var.multi_az ? aws_instance.nat_c[0].id : aws_instance.nat_a.id
+    network_interface_id = var.multi_az ? aws_instance.nat_c[0].id : aws_instance.nat_a.id
   }
 }
 
