@@ -21,6 +21,14 @@ output "public_subnet_ids" {
   ]
 }
 
+output "public_subnet_cidr_blocks" {
+  description = "A list of public subnet's cidr_block. For unconsciously availavirity zone."
+  value = [
+    aws_subnet.public_a.cidr_block,
+    aws_subnet.public_c.cidr_block
+  ]
+}
+
 output "private_subnet_a" {
   description = "private subnet of availavitity zone A in main VPC. Internet outbound creation is required, if you needed."
   value       = aws_subnet.private_a
@@ -36,6 +44,14 @@ output "private_subnet_ids" {
   value = [
     aws_subnet.private_a.id,
     aws_subnet.private_c.id
+  ]
+}
+
+output "private_subnet_cidr_blocks" {
+  description = "A list of private subnet's cidr_block. For unconsciously availavirity zone."
+  value = [
+    aws_subnet.private_a.cidr_block,
+    aws_subnet.private_c.cidr_block
   ]
 }
 
