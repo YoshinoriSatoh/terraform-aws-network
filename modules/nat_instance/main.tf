@@ -96,7 +96,7 @@ resource "aws_route_table" "private_a" {
 
   route {
     cidr_block           = "0.0.0.0/0"
-    network_interface_id = aws_instance.nat_a.id
+    network_interface_id = aws_instance.nat_a.primary_network_interface_id
   }
 }
 
@@ -113,7 +113,7 @@ resource "aws_route_table" "private_c" {
 
   route {
     cidr_block  = "0.0.0.0/0"
-    network_interface_id = var.multi_az ? aws_instance.nat_c[0].id : aws_instance.nat_a.id
+    network_interface_id = var.multi_az ? aws_instance.nat_c[0].primary_network_interface_id : aws_instance.nat_a.primary_network_interface_id
   }
 }
 
